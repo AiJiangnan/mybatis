@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.codeartist.mybatis.mapper.UserMapper">
-    <select id="selectById" resultType="cn.codeartist.mybatis.entity.User">
+
+    <resultMap id="resultMap" type="cn.codeartist.mybatis.entity.User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="extend" column="extend"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createUser" column="create_user"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="selectById" parameterType="long" resultType="cn.codeartist.mybatis.entity.User">
         SELECT * FROM t_user WHERE id = #{id}
     </select>
+
+    <select id="selectList" resultMap="resultMap">
+        SELECT * FROM t_user
+    </select>
+
+    <insert id="insert">
+        INSERT INTO t_user (name,username,password,extend) VALUES (#{name},#{username},#{password},#{extend});
+    </insert>
+
+    <update id="updateById">
+        UPDATE t_user SET password = #{password},extend = #{extend} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM t_user WHERE id = #{id}
+    </delete>
 </mapper>
