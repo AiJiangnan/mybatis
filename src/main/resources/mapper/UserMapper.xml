@@ -15,16 +15,20 @@
         <result property="status" column="status"/>
     </resultMap>
 
+    <sql id="base_columns">
+        id,name,username,password
+    </sql>
+
     <select id="selectById" parameterType="long" resultType="cn.codeartist.mybatis.entity.User">
-        SELECT * FROM t_user WHERE id = #{id}
+        SELECT <include refid="base_columns"/> FROM t_user WHERE id = #{id}
     </select>
 
     <select id="selectList" resultMap="resultMap">
         SELECT * FROM t_user
     </select>
 
-    <insert id="insert">
-        INSERT INTO t_user (name,username,password,extend) VALUES (#{name},#{username},#{password},#{extend});
+    <insert id="insert" parameterType="cn.codeartist.mybatis.entity.User">
+        INSERT INTO t_user (name,username,password,extend) VALUES (#{name},#{username},#{password},#{extend})
     </insert>
 
     <update id="updateById">
