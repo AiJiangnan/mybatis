@@ -2,7 +2,7 @@ package cn.codeartist.mybatis.entity;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.util.List;
 
 /**
  * 用户实体
@@ -17,10 +17,8 @@ public class User {
     private String name;
     private String username;
     private String password;
-    private String extend;
-    private Date createTime;
-    private Date updateTime;
-    private Long createUser;
-    private Long updateUser;
     private Integer status;
+
+    private UserExt extend;
+    private List<Address> addresses;
 }

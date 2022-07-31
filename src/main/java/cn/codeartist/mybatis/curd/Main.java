@@ -36,7 +36,6 @@ public class Main {
             user.setName("码匠");
             user.setUsername("CodeArtist");
             user.setPassword("444444");
-            user.setExtend("扩展信息");
             userMapper.insert(user);
 
             users = userMapper.selectList();
@@ -48,7 +47,6 @@ public class Main {
             user = new User();
             user.setId(5L);
             user.setPassword("555555");
-            user.setExtend("修改后的扩展信息");
             userMapper.updateById(user);
 
             users = userMapper.selectList();
