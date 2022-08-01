@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.codeartist.mybatis.mapper.UserSqlMapper">
+
+    <select id="selectByUsername" resultType="User">
+        SELECT * FROM t_user WHERE status = 1
+        <if test="username != null and username != ''">
+            AND username = #{username}
+        </if>
+    </select>
+
+    <select id="selectByStatus" resultType="User">
+        SELECT * FROM t_user WHERE 1 = 1
+        <choose>
+            <when test="status != null and status == 0">
+                AND status = 0
+            </when>
+            <otherwise>
+                AND username = #{username}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectByUsername1" resultType="User">
+        SELECT * FROM t_user WHERE
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        <if test="username != null and username != ''">
+            AND username = #{username}
+        </if>
+    </select>
+
+    <select id="selectByUsername2" resultType="User">
+        SELECT * FROM t_user
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="username != null and username != ''">
+                AND username = #{username}
+            </if>
+        </trim>
+    </select>
+
+    <select id="selectByUsername3" resultType="User">
+        SELECT * FROM t_user
+        <where>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="username != null and username != ''">
+                AND username = #{username}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByUsername4" resultType="User">
+        SELECT * FROM t_user
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="username != null and username != ''">
+                AND username = #{username}
+            </if>
+        </trim>
+    </select>
+
+    <update id="updateById">
+        UPDATE t_user
+        <set>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+        </set>
+    </update>
+
+    <update id="updateStatusById1">
+        UPDATE t_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+        </trim>
+    </update>
+
+    <select id="selectInIdList" resultType="User">
+        SELECT * FROM t_user
+        <where>
+            <foreach item="item" index="index" collection="idList" open="id in (" separator="," close=")"
+                     nullable="true">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+</mapper>

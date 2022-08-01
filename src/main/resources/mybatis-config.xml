@@ -25,5 +25,6 @@
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/UserExtMapper.xml"/>
+        <mapper resource="mapper/UserSqlMapper.xml"/>
     </mappers>
 </configuration>
