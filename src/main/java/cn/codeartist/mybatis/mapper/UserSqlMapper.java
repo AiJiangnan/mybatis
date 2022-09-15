@@ -14,9 +14,7 @@ import java.util.List;
  */
 public interface UserSqlMapper {
 
-    List<User> selectByUsername(@Param("username") String username);
-
-    List<User> selectByStatus(@Param("status") Integer status, @Param("username") String username);
+    List<User> selectByUsername(@Param("username") String username, @Param("status") Integer status);
 
     void updateById(User user);
 

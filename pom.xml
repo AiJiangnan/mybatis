@@ -12,9 +12,9 @@
 
     <properties>
         <!--Dependency-->
-        <mybatis.version>3.5.9</mybatis.version>
-        <h2.version>2.1.212</h2.version>
-        <lombok.version>1.16.20</lombok.version>
+        <mybatis.version>3.5.10</mybatis.version>
+        <h2.version>2.1.214</h2.version>
+        <lombok.version>1.18.24</lombok.version>
         <!--Configuration-->
         <java.version>1.8</java.version>
         <maven.test.skip>true</maven.test.skip>

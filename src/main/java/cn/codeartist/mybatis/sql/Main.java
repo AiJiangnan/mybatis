@@ -26,16 +26,7 @@ public class Main {
 
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             UserSqlMapper userSqlMapper = sqlSession.getMapper(UserSqlMapper.class);
-            List<User> users = userSqlMapper.selectByUsername(null);
-            System.out.println(users);
-
-            users = userSqlMapper.selectByUsername("ZhangSan");
-            System.out.println(users);
-
-            users = userSqlMapper.selectByStatus(0, "ZhangSan");
-            System.out.println(users);
-
-            users = userSqlMapper.selectByStatus(1, "ZhangSan");
+            List<User> users = userSqlMapper.selectByUsername(null, null);
             System.out.println(users);
 
             User user = new User();

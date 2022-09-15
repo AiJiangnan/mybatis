@@ -3,13 +3,16 @@
 <mapper namespace="cn.codeartist.mybatis.mapper.UserSqlMapper">
 
     <select id="selectByUsername" resultType="User">
-        SELECT * FROM t_user WHERE status = 1
+        SELECT * FROM t_user WHERE 1 = 1
+        <if test="status != null">
+            AND status = #{status}
+        </if>
         <if test="username != null and username != ''">
             AND username = #{username}
         </if>
     </select>
 
-    <select id="selectByStatus" resultType="User">
+    <select id="selectByUsername1" resultType="User">
         SELECT * FROM t_user WHERE 1 = 1
         <choose>
             <when test="status != null and status == 0">
@@ -19,16 +22,6 @@
                 AND username = #{username}
             </otherwise>
         </choose>
-    </select>
-
-    <select id="selectByUsername1" resultType="User">
-        SELECT * FROM t_user WHERE
-        <if test="status != null">
-            AND status = #{status}
-        </if>
-        <if test="username != null and username != ''">
-            AND username = #{username}
-        </if>
     </select>
 
     <select id="selectByUsername2" resultType="User">
@@ -55,31 +48,7 @@
         </where>
     </select>
 
-    <select id="selectByUsername4" resultType="User">
-        SELECT * FROM t_user
-        <trim prefix="WHERE" prefixOverrides="AND|OR">
-            <if test="status != null">
-                AND status = #{status}
-            </if>
-            <if test="username != null and username != ''">
-                AND username = #{username}
-            </if>
-        </trim>
-    </select>
-
     <update id="updateById">
-        UPDATE t_user
-        <set>
-            <if test="status != null">
-                status = #{status},
-            </if>
-            <if test="username != null and username != ''">
-                username = #{username},
-            </if>
-        </set>
-    </update>
-
-    <update id="updateStatusById1">
         UPDATE t_user
         <trim prefix="SET" suffixOverrides=",">
             <if test="status != null">
@@ -89,6 +58,18 @@
                 username = #{username},
             </if>
         </trim>
+    </update>
+
+    <update id="updateById1">
+        UPDATE t_user
+        <set>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+        </set>
     </update>
 
     <select id="selectInIdList" resultType="User">
